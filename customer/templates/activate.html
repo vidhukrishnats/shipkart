@@ -1,0 +1,9 @@
+{% block content %}
+
+Hi {{user.email}}
+
+Please verify your account using the link given below.
+
+http:://{{domain}}{% url 'activate' uidb64=uid token=token %}
+
+{% endblock %}

@@ -1,0 +1,6 @@
+{
+    "editor.fontSize": 12.5,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "workbench.activityBar.iconClickBehavior": "toggle"
+}

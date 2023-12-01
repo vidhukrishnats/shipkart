@@ -1,0 +1,108 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<link rel = "stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+{% if request.user.is_authenticated %}
+<br><br>
+<section class="section-intro padding-y-sm">
+<div class="container">
+
+<div class="intro-banner-wrap">
+	<img src="{% static './images/banner.jpg' %}" class="img-fluid rounded">
+</div>
+
+</div> <!-- container //  -->
+</section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="d-flex justify-content-end mb-3">
+            <form action="{% url 'allproducts' %}" method="get" class="d-flex">
+                <select name="sort" class="form-select me-2">
+                    <option value="low_to_high">Price: Low to High</option>
+                    <option value="high_to_low">Price: High to Low</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Sort</button>
+            </form>
+        </div>
+      <div class="pb-3 h5">All Products</div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+
+        {% for product in products %}
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="img-fluid" alt="Responsive image" src="{{ product.image.url }}">
+            <div class="card-body">
+              <p class="card-text">
+                <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">{{ product.title |slice:":50" }}</a>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">{{product.category.name}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+
+{% else %}
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="h1 fw-bold">Search, See & Ship.</h1>
+        <p class="lead text-muted">Tech enthusiasts, rejoice! Delve into our tech haven, featuring cutting-edge gadgets, smart devices, and electronics that 
+            push the boundaries of innovation. From the latest smartphones to state-of-the-art smart home solutions, we have everything to cater to your tech-savvy needs.</p>
+        <p>
+          <a href="{% url 'register' %}" class="btn btn-primary my-2">Add Account</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="d-flex justify-content-end mb-3">
+            <form action="{% url 'allproducts' %}" method="get" class="d-flex">
+                <select name="sort" class="form-select me-2">
+                    <option value="low_to_high">Price: Low to High</option>
+                    <option value="high_to_low">Price: High to Low</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Sort</button>
+            </form>
+        </div>
+      <div class="pb-3 h5">All Products</div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+
+        {% for product in products %}
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="img-fluid" alt="Responsive image" src="{{ product.image.url }}">
+            <div class="card-body">
+              <p class="card-text">
+                <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">{{ product.title |slice:":50" }}</a>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">{{product.category.name}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+
+{% endif %}
+
+{% endblock %}

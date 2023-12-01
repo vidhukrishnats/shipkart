@@ -1,0 +1,37 @@
+{% extends "main.html" %}
+
+{% block content %}
+<br>
+<div class="content-section col-lg-12 col-md-12 col-sm-12 tutorial-style" style="min-height:65vh;">
+    <h2 class="account-heading">{{ form.instance.name }} <small class="text-muted">{{ form.instance.first_name }} {{form.instance.last_name}}</small></h2>
+    <p class="text-secondary">{{ form.instance.email }}</p>
+
+    <br>
+    <br>
+
+{% if user.username == form.instance.username %}
+
+    <h3>Edit Profile Information</h3>
+    <br>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.username.id_for_label }}">Username - </label>
+            {{ form.first_name }}
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">Name - </label>
+            {{ form.name }}
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="{{ form.email.id_for_label }}">email - </label>
+            {{ form.email }}
+        </div>        
+        <br>
+        <button class="btn btn-outline-info" type="submit">Update</button>
+    </form>
+</div>
+{% endif %}
+{% endblock content %}
